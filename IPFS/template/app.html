@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload File to IPFS</title>
+    <!-- Bootstrap 4 CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 4.5rem;
+        }
+        .container {
+            max-width: 600px;
+        }
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">IPFS Uploader</a>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                <h4>Upload File to IPFS</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="file">Choose file to upload:</label>
+                        <input type="file" name="file" class="form-control-file" id="file">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </form>
+            </div>
+        </div>
+        {% if status_message %}
+        <div class="alert alert-success mt-3" role="alert">
+            {{ status_message }} IPFS Hash: <strong>{{ file_hash }}</strong><br>
+            Download from IPFS: <a href="https://ipfs.io/ipfs/{{ file_hash }}" target="_blank">{{ file_hash }}</a>
+        </div>
+        {% elif error_message %}
+        <div class="alert alert-danger mt-3" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap 4 JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

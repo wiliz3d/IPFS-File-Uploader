@@ -10,7 +10,7 @@ This project is a simple web application built with Django that allows users to 
 
 - Upload files to IPFS
 - Retrieve and display the IPFS hash of the uploaded file
-- Simple web interface using Bootstrap 5
+- Simple web interface using Bootstrap 4
 
 ## Requirements
 
